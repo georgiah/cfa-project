@@ -1,0 +1,22 @@
+{
+  "name": "cfa-project",
+  "version": "1.0.0",
+  "description": "A single page web application built with choo",
+  "main": "index.js",
+  "scripts": {
+    "build": "bankai build index.js dist/",
+    "start": "bankai index.js --debug",
+    "test": "standard"
+  },
+  "author": "georgiah",
+  "license": "MIT",
+  "devDependencies": {
+    "bankai": "^7.6.1",
+    "standard": "^10.0.2"
+  },
+  "dependencies": {
+    "choo": "^5.4.0",
+    "choo-reload": "^1.0.0",
+    "sheetify": "^6.0.2"
+  }
+}
