@@ -21,7 +21,7 @@ document.body.appendChild(app.start())
 
 // home template
 function home () {
-	return html`
-		<h1>Hello world</h1>
-	`
+  return html`
+    <h1>Hello world</h1>
+  `
 }
