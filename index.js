@@ -26,5 +26,20 @@ css('./style.css')
 // declare routes
 app.route('/', home)
 
+app.route('/registration', registration)
+app.route('/registration/new/owner', null)
+app.route('/registration/new/pets', null)
+
+app.route('/registration/renew', null)
+app.route('/registration/renew/confirm', null)
+app.route('/registration/renew/address', null)
+app.route('/registration/renew/pets', null)
+
+app.route('/registration/error', null)
+
+app.route('/payment', null)
+app.route('/payment/success', null)
+app.route('/payment/fail', null)
+
 // start application
 document.body.appendChild(app.start())
