@@ -19,6 +19,7 @@ module.exports = function (state, emit) {
         <h1>Pet Registration</h1>
         <h3>Make your payment</h3>
         <div class="form-container">
+          ${breakdown()}
           <div class="form-field">
             Card Name
             <input type="text" id="name" value=${name} oninput=${update} />
@@ -40,6 +41,47 @@ module.exports = function (state, emit) {
           Submit
         </button>
       </section>
+    `
+  }
+
+  // display payment breakdown
+  function breakdown () {
+    var type = state.newPet.type
+    var baseCost = 0
+
+    if (type === 'cat') baseCost = 96
+    if (type === 'dog') baseCost = 150
+
+    return html`
+      <div>
+        <h3>Breakdown:</h3>
+        <div class="breakdown">
+          <p>${type}: $${baseCost}</p>
+          ${applyDiscount(baseCost)}
+        </div>
+      </div>
+    `
+  }
+
+  // display discounts and total cost
+  function applyDiscount (baseCost) {
+    var age = state.newPet.age
+    var desexed = state.newPet.desexed
+
+    var discountType = ''
+    var discount = (2 * baseCost) / 3
+
+    // override desexed type if animal is senior
+    if (desexed) discountType = 'desexed'
+    if (age > 10) discountType = 'senior'
+
+    if (discountType) baseCost /= 3
+
+    return html`
+      <div>
+      ${discountType ? html`<p>${discountType}: -$${discount}` : null}
+      <h4>total cost: $${baseCost}</h4>
+      </div>
     `
   }
 
