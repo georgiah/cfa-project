@@ -15,24 +15,23 @@ module.exports = function (state, emit) {
     var exp = state.payment.card.exp
 
     return html`
-      <div>
-        <div>
-          Payment Details
-        </div>
-        <div>
-          <div>
+      <section class="payment">
+        <h1>Pet Registration</h1>
+        <h3>Make your payment</h3>
+        <div class="form-container">
+          <div class="form-field">
             Card Name
             <input type="text" id="name" value=${name} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Card Number
             <input type="text" id="number" value=${number} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             CCV
             <input type="text" id="ccv" value=${ccv} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Expiry Date
             <input type="text" id="exp" value=${exp} oninput=${update} />
           </div>
@@ -40,7 +39,7 @@ module.exports = function (state, emit) {
         <button type="submit" onclick=${submit}>
           Submit
         </button>
-      </div>
+      </section>
     `
   }
 

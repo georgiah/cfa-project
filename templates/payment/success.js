@@ -11,7 +11,7 @@ module.exports = function (state, emit) {
   function success () {
     return html`
       <div>
-        Payment successful!
+        <h3>Payment successful!</h3>
       </div>
     `
   }

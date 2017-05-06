@@ -8,7 +8,7 @@ var button = require('./button.js')
 module.exports = function () {
   return html`
     <nav>
-      ${button('Registration')}
+      ${button('Registration', '/registration')}
       ${button('Microchips')}
       <a href="/">
         <img class="logo" src="/assets/logo.png" />

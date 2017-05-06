@@ -8,6 +8,24 @@ body {
   justify-content: center;
 }
 
+button {
+  background: pink;
+  border: 0;
+  color: #333;
+  padding: 0.3rem 0.5rem;
+}
+
+button:hover {
+  background: orange;
+}
+
+button:active {
+  background: red;
+  color: white;
+}
+
+button:focus, input:focus { outline: 0; }
+
 .container { width: 800px; }
 
 nav {
@@ -21,7 +39,9 @@ nav {
 
 .logo { width: 150px; }
 
-.content {}
+section.content {
+  margin: 0 0 2rem 0;
+}
 
 a { color: #ff697c; }
 a:hover { color: #ffa0ac; }
@@ -33,5 +53,80 @@ nav a {
 }
 
 .error {
-  color: #e22f2f;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  
+}
+
+.warning {
+  align-items: center;
+  background: #f5f5f5;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.warning > button {
+  width: 75px;
+}
+
+section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+section > h3 {
+  margin: 0 0 2rem 0;
+}
+
+section.registration > button {
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  font-size: 18px;
+  padding: 0.75rem 1rem;
+}
+
+section.registration > button > a {
+  color: #333;
+  text-decoration: none;
+}
+
+section.registration > button > a:hover {
+  color: white;
+}
+
+section.registration > button.renew {
+  background: #f6a623;
+  margin: 0 0 1rem 0;
+}
+
+section.registration > button.new {
+  background: #50e3c2;
+}
+
+.form-container {
+  margin: 0 0 1rem 0;
+  width: 40%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 0.5rem 0;
+}
+
+footer {
+  text-align: center;
 }

@@ -12,6 +12,7 @@ module.exports = function (child) {
       <section class="content">
         ${child()}
       </section>
+      <footer>Copyright © 2017 Capital City Council</footer>
     </div>
   `
 }

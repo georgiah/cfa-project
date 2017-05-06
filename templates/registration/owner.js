@@ -21,51 +21,49 @@ module.exports = function (state, emit) {
 
   function owner () {
     return html`
-      <div>
-        <div>
-          Owner Details
-        </div>
-        <div>
-          <div>
+      <section class="owner">
+        <h1>Pet Registration</h1>
+        <h3>Tell us who you are</h3>
+
+        <div class="form-container">
+          <div class="form-field">
             First Name
             <input type="text" id="firstName" value=${firstName} oninput=${updateName} />
           </div>
-          <div>
+          <div class="form-field">
             Last Name
             <input type="text" id="lastName" value=${lastName} oninput=${updateName} />
           </div>
-        </div>
-        <div>
-          <div>
+          <div class="form-field">
             Unit Number
             <input type="text" id="unitNumber" value=${unitNumber} oninput=${updateAddress} />
           </div>
-          <div>
+          <div class="form-field">
             House Number
             <input type="text" id="houseNumber" value=${houseNumber} oninput=${updateAddress} />
           </div>
-          <div>
+          <div class="form-field">
             Street Name
             <input type="text" id="streetName" value=${streetName} oninput=${updateAddress} />
           </div>
-          <div>
+          <div class="form-field">
             Street Type
             <input type="text" id="streetType" value=${streetType} oninput=${updateAddress} />
           </div>
-          <div>
+          <div class="form-field">
             Suburb
             <input type="text" id="suburb" value=${suburb} oninput=${updateAddress} />
           </div>
-          <div>
+          <div class="form-field">
             Postcode
             <input type="text" id="postcode" value=${postcode} oninput=${updateAddress} />
           </div>
         </div>
-        ${error(state.error)}
         <button type="submit" onclick=${submit}>
           Submit
         </button>
-      </div>
+        ${error(state, emit)}
+      </section>
     `
   }
 
@@ -88,9 +86,6 @@ module.exports = function (state, emit) {
   // submit owner registration
   function submit (e) {
     var streetName = state.owner.address.streetName
-
-    // clear error state
-    emit('errorClear')
 
     // street name validation
     if (streetName !== 'Abbotsford') {

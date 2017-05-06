@@ -10,13 +10,18 @@ module.exports = function (state, emit) {
 
   function registration () {
     return html`
-      <div>
-        <div>
-          Are you renewing your registration or registering a new animal?
-        </div>
-        <a href="/registration/renew">Renewing</a>
-        <a href="/registration/new/owner">Registering</a>
-      </div>
+      <section class="registration">
+        <h1>Pet Registration</h1>
+        <h3>What would you like to do?</h3>
+
+        <button class="renew">
+          <a href="/registration/renew">Renew an existing animal</a>
+        </button>
+
+        <button class="new">
+          <a href="/registration/new/owner">Register a new animal</a>
+        </button>
+      </section>
     `
   }
 }

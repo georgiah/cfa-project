@@ -19,32 +19,32 @@ module.exports = function (state, emit) {
 
   function pets () {
     return html`
-      <div>
-        <div>
-          Pet Details
-        </div>
-        <div>
-          <div>
+      <section class="pets">
+        <h1>Pet Registration</h1>
+        <h3>Tell us about your animal</h3>
+
+        <div class="form-container">
+          <div class="form-field">
             Animal Type
             <input type="text" id="type" value=${type} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Name
             <input type="text" id="name" value=${name} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Age
             <input type="text" id="age" value=${age} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Breed
             <input type="text" id="breed" value=${breed} oninput=${update} />
           </div>
-          <div>
-            Microchip Number
+          <div class="form-field">
+            Microchip #
             <input type="text" id="microchip" value=${microchip} oninput=${update} />
           </div>
-          <div>
+          <div class="form-field">
             Desexed
             <input type="text" id="desexed" value=${desexed} oninput=${update} />
           </div>
@@ -52,7 +52,7 @@ module.exports = function (state, emit) {
         <button type="submit" onclick=${submit}>
           Submit
         </button>
-      </div>
+      </section>
     `
   }
 
