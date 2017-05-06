@@ -1,7 +1,7 @@
-// require dependencies
+// import dependencies
 var html = require('choo/html')
 
-// import button template
+// import templates
 var button = require('./button.js')
 
 // navigation template
@@ -11,7 +11,7 @@ module.exports = function () {
       ${button('Registration')}
       ${button('Microchips')}
       <a href="/">
-        <img class="logo" src="assets/logo.png" />
+        <img class="logo" src="/assets/logo.png" />
       </a>
       ${button('Contact')}
       ${button('About')}

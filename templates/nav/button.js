@@ -1,4 +1,4 @@
-// require dependencies
+// import dependencies
 var html = require('choo/html')
 
 // button template

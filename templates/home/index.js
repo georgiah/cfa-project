@@ -1,17 +1,18 @@
-// require dependencies
+// import dependencies
 var html = require('choo/html')
 
-// import template
+// import templates
 var base = require('../base')
 
-function home () {
-  return html`
-    <div>
-      This is home
-    </div>
-  `
-}
-
-module.exports = function () {
+// home template
+module.exports = function (state, emit) {
   return base(home)
+
+  function home () {
+    return html`
+      <div>
+        This is home
+      </div>
+    `
+  }
 }

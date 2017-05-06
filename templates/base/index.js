@@ -1,9 +1,10 @@
-// require dependencies
+// import dependencies
 var html = require('choo/html')
 
-// import template
+// import templates
 var nav = require('../nav')
 
+// base wrapper template
 module.exports = function (child) {
   return html`
     <div class="container">
