@@ -6,9 +6,14 @@ var reload = require('choo-reload')
 
 // import template
 var nav = require('./templates/nav')
+// import state middleware
+var state = require('./lib/state')
 
 // initialise choo
 var app = choo()
+
+// setup app state
+app.use(state)
 
 // setup reloading
 app.use(reload())
