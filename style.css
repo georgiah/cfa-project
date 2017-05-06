@@ -31,3 +31,7 @@ nav a {
   color: #333333;
   text-decoration: none;
 }
+
+.error {
+  color: #e22f2f;
+}
