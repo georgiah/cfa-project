@@ -100,7 +100,7 @@ module.exports = function (state, emit) {
       // stop loading spinner
       emit('toggleLoading')
       // street name validation
-      if (streetName !== 'Abbotsford') {
+      if (streetName !== 'Smith') {
         // update error state
         emit('error', 'Address is invalid.')
       } else {
