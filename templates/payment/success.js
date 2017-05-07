@@ -10,8 +10,10 @@ module.exports = function (state, emit) {
 
   function success () {
     return html`
-      <div>
-        <h3>Payment successful!</h3>
+      <div class="success">
+        <h1>Payment successful!</h1>
+
+        <p>Lorem ipsum dolor sit amet, vel dolor quaestio te, mei malis interpretaris ne, ullum inani vix et. Mei ut definiebas accommodare.</p>
       </div>
     `
   }
