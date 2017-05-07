@@ -11,9 +11,10 @@ var home = require('./templates/home')
 var registration = require('./templates/registration')
 var owner = require('./templates/registration/owner.js')
 var pets = require('./templates/registration/pets.js')
+var renew = require('./templates/renew')
+var confirm = require('./templates/renew/confirm')
 var payment = require('./templates/payment')
 var success = require('./templates/payment/success.js')
-var failure = require('./templates/payment/failure.js')
 
 // initialise choo
 var app = choo()
@@ -35,16 +36,13 @@ app.route('/registration', registration)
 app.route('/registration/new/owner', owner)
 app.route('/registration/new/pets', pets)
 
-app.route('/registration/renew', null)
-app.route('/registration/renew/confirm', null)
-app.route('/registration/renew/address', null)
-app.route('/registration/renew/pets', null)
+app.route('/registration/renew', renew)
+app.route('/registration/renew/confirm', confirm)
 
 app.route('/registration/error', null)
 
 app.route('/payment', payment)
 app.route('/payment/success', success)
-app.route('/payment/fail', failure)
 
 // start application
 document.body.appendChild(app.start())

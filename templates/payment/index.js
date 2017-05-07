@@ -3,6 +3,7 @@ var html = require('choo/html')
 
 // import templates
 var base = require('../base')
+var error = require('../error')
 
 // payment template
 module.exports = function (state, emit) {
@@ -19,7 +20,9 @@ module.exports = function (state, emit) {
         <h1>Pet Registration</h1>
         <h3>Make your payment</h3>
         <div class="form-container">
+          <h3>Payment breakdown</h3>
           ${breakdown()}
+          ${totalCost()}
           <div class="form-field">
             Card Name
             <input type="text" id="name" value=${name} oninput=${update} />
@@ -40,49 +43,71 @@ module.exports = function (state, emit) {
         <button type="submit" onclick=${submit}>
           Submit
         </button>
+        ${error(state, emit)}
       </section>
     `
   }
 
   // display payment breakdown
   function breakdown () {
-    var type = state.newPet.type
-    var baseCost = 0
+    var pets = state.pets
 
-    if (type === 'cat') baseCost = 96
-    if (type === 'dog') baseCost = 150
+    if (state.newPet.type !== '') {
+      pets.push(state.newPet)
+    }
 
-    return html`
-      <div>
-        <h3>Breakdown:</h3>
-        <div class="breakdown">
-          <p>${type}: $${baseCost}</p>
-          ${applyDiscount(baseCost)}
+    return pets.map(function (pet) {
+      var cost = petCost(pet)
+
+      return html`
+        <div>
+          <p>${pet.type}: $${cost.baseCost}</p>
+          ${cost.discountType ? html`<p>${cost.discountType}: -$${cost.discount}</p>` : null}
         </div>
-      </div>
-    `
+      `
+    })
   }
 
-  // display discounts and total cost
-  function applyDiscount (baseCost) {
-    var age = state.newPet.age
-    var desexed = state.newPet.desexed
+  // display total cost
+  function totalCost () {
+    var pets = state.pets
+    var total = 0
 
-    var discountType = ''
-    var discount = (2 * baseCost) / 3
+    if (state.newPet.type !== '') pets.push(state.newPet)
 
-    // override desexed type if animal is senior
-    if (desexed) discountType = 'desexed'
-    if (age > 10) discountType = 'senior'
+    return pets.map(function (pet, i, arr) {
+      var cost = petCost(pet)
 
-    if (discountType) baseCost /= 3
+      total += cost.total
 
-    return html`
-      <div>
-      ${discountType ? html`<p>${discountType}: -$${discount}` : null}
-      <h4>total cost: $${baseCost}</h4>
-      </div>
-    `
+      if (i === (arr.length - 1)) {
+        return html`
+          <h4>Total: $${total}</h4>
+      `
+      }
+    })
+  }
+
+  // calculate cost per pet
+  function petCost (pet) {
+    var cost = {
+      baseCost: 0,
+      discount: 0,
+      discountType: '',
+      total: 0
+    }
+
+    if (pet.type === 'Cat') cost.baseCost = 96
+    if (pet.type === 'Dog') cost.baseCost = 150
+
+    if (pet.desexed) cost.discountType = 'Desexed'
+    if (pet.age > 10) cost.discountType = 'Senior'
+
+    if (cost.discountType !== '') cost.discount = (2 * cost.baseCost / 3)
+
+    cost.total = cost.baseCost - cost.discount
+
+    return cost
   }
 
   // update payment details state
@@ -95,7 +120,17 @@ module.exports = function (state, emit) {
 
   // submit payment
   function submit () {
-    // redirect user to payment success screen
-    emit('pushState', '/payment/success')
+    var number = state.payment.card.number
+    var ccv = state.payment.card.ccv
+
+    // simple validation
+    if ((number.length !== 16) || (ccv.length !== 3)) {
+      // update error state
+      emit('error', 'There has been a problem processing your payment.')
+    } else {
+      // redirect user to payment success screen
+      emit('clearState')
+      emit('pushState', '/payment/success')
+    }
   }
 }
