@@ -39,8 +39,6 @@ app.route('/registration/new/pets', pets)
 app.route('/registration/renew', renew)
 app.route('/registration/renew/confirm', confirm)
 
-app.route('/registration/error', null)
-
 app.route('/payment', payment)
 app.route('/payment/success', success)
 
