@@ -1,7 +1,6 @@
 // import dependencies
 var choo = require('choo')
 var css = require('sheetify')
-var reload = require('choo-reload')
 
 // import state middleware
 var state = require('./lib/state')
@@ -21,9 +20,6 @@ var app = choo()
 
 // setup app state
 app.use(state)
-
-// setup reloading
-app.use(reload())
 
 // import stylesheets
 css('./assets/normalize.css')

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "choo": "^5.4.0",
-    "choo-reload": "^1.0.0",
     "sheetify": "^6.0.2"
   }
 }
