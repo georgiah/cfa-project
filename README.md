@@ -55,7 +55,7 @@ $ npm run build
 A self-contained and optimised version of the application should now be available in the `dist` folder.
 
 ## Discussion
-![form](assets/form.JPG)
+![form](assets/form.jpg)
 
 The flow of the site was roughly modelled off a real-life animal registration form that I received in the mail.
 I wanted to mimic the flow of the form on the website, and add in the capability to identify yourself and have your animals prepopulate in the form.
