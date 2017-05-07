@@ -11,6 +11,7 @@ module.exports = function (state, emit) {
   function registration () {
     return html`
       <section class="registration">
+        ${clearState()}
         <h1>Pet Registration</h1>
 
         <p>In Capital City, all pet owners are required by law to register their pets with the council. If your pet becomes lost, having it registered in advance will help improve the chances that you will both be reunited.</p>
@@ -28,5 +29,9 @@ module.exports = function (state, emit) {
         </button>
       </section>
     `
+  }
+
+  function clearState () {
+    emit('clearState')
   }
 }

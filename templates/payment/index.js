@@ -50,11 +50,11 @@ module.exports = function (state, emit) {
 
   // display payment breakdown
   function breakdown () {
-    var pets = state.pets
+    var pets
 
-    if (state.newPet.type !== '') {
-      pets.push(state.newPet)
-    }
+    if (state.newPet.type !== '') state.pets = [state.newPet]
+
+    pets = state.pets
 
     return pets.map(function (pet) {
       var cost = petCost(pet)
@@ -72,8 +72,6 @@ module.exports = function (state, emit) {
   function totalCost () {
     var pets = state.pets
     var total = 0
-
-    if (state.newPet.type !== '') pets.push(state.newPet)
 
     return pets.map(function (pet, i, arr) {
       var cost = petCost(pet)
