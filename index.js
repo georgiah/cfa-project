@@ -29,7 +29,7 @@ css('./assets/normalize.css')
 css('./assets/style.css')
 
 // declare routes
-app.route('/', home)
+app.route('/', registration)
 
 app.route('/microchipping', microchipping)
 app.route('/contact', contact)
