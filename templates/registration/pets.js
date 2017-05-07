@@ -8,12 +8,10 @@ var base = require('../base')
 module.exports = function (state, emit) {
   var pet = state.newPet
 
-  var type = pet.type
   var name = pet.name
   var age = pet.age
   var breed = pet.breed
   var microchip = pet.microchip
-  var desexed = pet.desexed
 
   return base(pets)
 

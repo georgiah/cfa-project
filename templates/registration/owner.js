@@ -22,7 +22,7 @@ module.exports = function (state, emit) {
   var postcode = state.owner.address.postcode
 
   var loading = state.loading
-  
+
   return base(owner)
 
   function owner () {

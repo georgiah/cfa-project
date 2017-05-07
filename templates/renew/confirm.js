@@ -3,7 +3,6 @@ var html = require('choo/html')
 
 // import templates
 var base = require('../base')
-var error = require('../error')
 
 // renewal confirmation template
 module.exports = function (state, emit) {
