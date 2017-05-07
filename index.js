@@ -26,8 +26,8 @@ app.use(state)
 app.use(reload())
 
 // import stylesheets
-css('./normalize.css')
-css('./style.css')
+css('./assets/normalize.css')
+css('./assets/style.css')
 
 // declare routes
 app.route('/', home)
