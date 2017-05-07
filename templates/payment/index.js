@@ -1,9 +1,13 @@
 // import dependencies
 var html = require('choo/html')
 
+// import utilities
+var api = require('../../lib/api')
+
 // import templates
 var base = require('../base')
 var error = require('../error')
+var spinner = require('../spinner')
 
 // payment template
 module.exports = function (state, emit) {
@@ -14,6 +18,8 @@ module.exports = function (state, emit) {
     var number = state.payment.card.number
     var ccv = state.payment.card.ccv
     var exp = state.payment.card.exp
+
+    var loading = state.loading
 
     return html`
       <section class="payment">
@@ -40,9 +46,7 @@ module.exports = function (state, emit) {
         <h2>Cost breakdown</h2>
         ${breakdown()}
         ${totalCost()}
-        <button class="submit" onclick=${submit}>
-          Pay & Submit
-        </button>
+        ${loading ? spinner() : html`<button class="submit" onclick=${submit}>Pay & Submit</button>`}
         ${error(state, emit)}
       </section>
     `
@@ -118,17 +122,23 @@ module.exports = function (state, emit) {
 
   // submit payment
   function submit () {
-    var number = state.payment.card.number
-    var ccv = state.payment.card.ccv
+    emit('toggleLoading')
 
-    // simple validation
-    if ((number.length !== 16) || (ccv.length !== 3)) {
-      // update error state
-      emit('error', 'There has been a problem processing your payment.')
-    } else {
-      // redirect user to payment success screen
-      emit('clearState')
-      emit('pushState', '/payment/success')
-    }
+    api(function () {
+      emit('toggleLoading')
+      
+      var number = state.payment.card.number
+      var ccv = state.payment.card.ccv
+
+      // simple validation
+      if ((number.length !== 16) || (ccv.length !== 3)) {
+        // update error state
+        emit('error', 'There has been a problem processing your payment.')
+      } else {
+        // redirect user to payment success screen
+        emit('clearState')
+        emit('pushState', '/payment/success')
+      }
+    })
   }
 }

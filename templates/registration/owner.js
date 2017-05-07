@@ -1,9 +1,13 @@
 // import dependencies
 var html = require('choo/html')
 
+// import utilities
+var api = require('../../lib/api')
+
 // import templates
 var base = require('../base')
 var error = require('../error')
+var spinner = require('../spinner')
 
 // owner registration template
 module.exports = function (state, emit) {
@@ -17,6 +21,8 @@ module.exports = function (state, emit) {
   var suburb = state.owner.address.suburb
   var postcode = state.owner.address.postcode
 
+  var loading = state.loading
+  
   return base(owner)
 
   function owner () {
@@ -62,9 +68,7 @@ module.exports = function (state, emit) {
             <input type="text" id="postcode" value=${postcode} oninput=${updateAddress} />
           </div>
         </div>
-        <button class="submit" onclick=${submit}>
-          Next
-        </button>
+        ${loading ? spinner() : html`<button class="submit" onclick=${submit}>Next</button>`}
         ${error(state, emit)}
       </section>
     `
@@ -89,14 +93,22 @@ module.exports = function (state, emit) {
   // submit owner registration
   function submit (e) {
     var streetName = state.owner.address.streetName
+    // start loading spinner
+    emit('toggleLoading')
 
-    // street name validation
-    if (streetName !== 'Abbotsford') {
-      // update error state
-      emit('error', 'Address is invalid.')
-    } else {
-      // redirect user to new pet registration
-      emit('pushState', '/registration/new/pets')
-    }
+    api(function () {
+      // stop loading spinner
+      emit('toggleLoading')
+      // street name validation
+      if (streetName !== 'Abbotsford') {
+        // update error state
+        emit('error', 'Address is invalid.')
+      } else {
+        // reset window position
+        window.scrollTo(0, 0)
+        // redirect user to new pet registration
+        emit('pushState', '/registration/new/pets')
+      }
+    })
   }
 }

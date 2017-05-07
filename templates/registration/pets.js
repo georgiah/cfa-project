@@ -84,6 +84,9 @@ module.exports = function (state, emit) {
 
   // submit new pet registration
   function submit () {
+    // reset window position
+    window.scrollTo(0, 0)
+
     // redirect user to payment screen
     emit('pushState', '/payment')
   }

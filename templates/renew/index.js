@@ -1,14 +1,19 @@
 // import dependencies
 var html = require('choo/html')
 
+// import utilities
+var api = require('../../lib/api')
+var db = require('../../lib/db')
+
 // import templates
 var base = require('../base')
-var db = require('../../lib/db.js')
 var error = require('../error')
+var spinner = require('../spinner')
 
 // pet renewal template
 module.exports = function (state, emit) {
   var key = state.owner.key
+  var loading = state.loading
 
   return base(renew)
 
@@ -27,9 +32,7 @@ module.exports = function (state, emit) {
             <input type="text" id="key" value=${key} oninput=${updateKey} />
           </div>
         </div>
-        <button class="submit" onclick=${submit}>
-          Next
-        </button>
+        ${loading ? spinner() : html`<button class="submit" onclick=${submit}>Next</button>`}
         ${error(state, emit)}
       </section>
     `
@@ -44,18 +47,23 @@ module.exports = function (state, emit) {
 
   // submit owner key
   function submit (e) {
-    var key = state.owner.key
+    emit('toggleLoading')
 
-    // validate owner key
-    db.lookup(key, function (record) {
-      if (record === null) {
-        // update error state
-        emit('error', 'Owner Key is invalid')
-      } else {
-        // load owner's record into state and redirect to pet confirmation
-        emit('loadRecord', record)
-        emit('pushState', '/registration/renew/confirm')
-      }
+    api(function () {
+      var key = state.owner.key
+      emit('toggleLoading')
+
+      // validate owner key
+      db.lookup(key, function (record) {
+        if (record === null) {
+          // update error state
+          emit('error', 'Owner Key is invalid')
+        } else {
+          // load owner's record into state and redirect to pet confirmation
+          emit('loadRecord', record)
+          emit('pushState', '/registration/renew/confirm')
+        }
+      })
     })
   }
 }
