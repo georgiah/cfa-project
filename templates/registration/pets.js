@@ -29,7 +29,11 @@ module.exports = function (state, emit) {
         <div class="form-container">
           <div class="form-field">
             Animal Type
-            <input type="text" id="type" value=${type} oninput=${update} />
+            <select id="type" onchange=${updateSelect}>
+              <option disabled selected></option>
+              <option value="Cat">Cat</option>
+              <option value="Dog">Dog</option>
+            </select>
           </div>
           <div class="form-field">
             Name
@@ -49,14 +53,25 @@ module.exports = function (state, emit) {
           </div>
           <div class="form-field">
             Desexed
-            <input type="text" id="desexed" value=${desexed} oninput=${update} />
+            <select id="desexed" onchange=${updateSelect}>
+              <option disabled selected></option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
         </div>
-        <button class="submit" onclick=${submit}>
-          Next
-        </button>
+        <button class="submit" onclick=${submit}>Next</button>
       </section>
     `
+  }
+
+  // update new pet state with <select>
+  function updateSelect (e) {
+    var type = (e.target.id === 'type')
+    var id = type ? 'type' : 'desexed'
+    var value = (type ? e.target.value : (e.target.value === 'true'))
+    
+    emit('updateNewPet', {id: id, text: value})
   }
 
   // update new pet state
