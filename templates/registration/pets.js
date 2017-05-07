@@ -31,8 +31,8 @@ module.exports = function (state, emit) {
             Animal Type
             <select id="type" onchange=${updateSelect}>
               <option disabled selected></option>
-              <option value="Cat">Cat</option>
-              <option value="Dog">Dog</option>
+              <option>Cat</option>
+              <option>Dog</option>
             </select>
           </div>
           <div class="form-field">
@@ -70,7 +70,7 @@ module.exports = function (state, emit) {
     var type = (e.target.id === 'type')
     var id = type ? 'type' : 'desexed'
     var value = (type ? e.target.value : (e.target.value === 'true'))
-    
+
     emit('updateNewPet', {id: id, text: value})
   }
 

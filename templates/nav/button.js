@@ -1,7 +1,7 @@
 // import dependencies
 var html = require('choo/html')
 
-// button template
+// <nav> button template
 module.exports = function (label, link) {
   if (!link) link = '#'
 

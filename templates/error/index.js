@@ -17,7 +17,8 @@ module.exports = function (state, emit) {
     `
   }
 
-  function close (e) {
+  // clear error state
+  function close () {
     emit('errorClear')
   }
 }

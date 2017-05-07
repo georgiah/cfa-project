@@ -31,17 +31,21 @@ module.exports = function (state, emit) {
     `
   }
 
-  // display pet information
+  // map function for rendering pet details
   function displayPet (pet) {
     return html`
       <tr>
-        <td>${pet.name}</td><td>${pet.type}</td><td>${pet.breed}</td><td>${pet.microchip}</td>
+        <td>${pet.name}</td>
+        <td>${pet.type}</td>
+        <td>${pet.breed}</td>
+        <td>${pet.microchip}</td>
       </tr>
     `
   }
 
   // redirect user to address confirmation
   function valid () {
+    window.scrollTo(0, 0)
     emit('pushState', '/payment')
   }
 

@@ -52,14 +52,14 @@ module.exports = function (state, emit) {
     `
   }
 
-  // display payment breakdown
+  // render payment breakdown
   function breakdown () {
+    // if registering new animal, add "new pet" to pet state
     var pets
-
     if (state.newPet.type !== '') state.pets = [state.newPet]
-
     pets = state.pets
 
+    // render each pet
     return pets.map(function (pet) {
       var cost = petCost(pet)
 
@@ -77,15 +77,14 @@ module.exports = function (state, emit) {
     var pets = state.pets
     var total = 0
 
+    // sum cost of each pet & render total
     return pets.map(function (pet, i, arr) {
       var cost = petCost(pet)
-
       total += cost.total
 
+      // render "total amount" markup on last iteration
       if (i === (arr.length - 1)) {
-        return html`
-          <h4>Total: $${total}</h4>
-      `
+        return html`<h4>Total: $${total}</h4> `
       }
     })
   }
@@ -99,16 +98,20 @@ module.exports = function (state, emit) {
       total: 0
     }
 
-    if (pet.type === 'Cat') cost.baseCost = 96
-    if (pet.type === 'Dog') cost.baseCost = 150
+    // setting a base cost
+    if (pet.type.toLowerCase() === 'cat') cost.baseCost = 96
+    if (pet.type.toLowerCase() === 'dog') cost.baseCost = 150
 
+    // checking if any discounts should be applied
     if (pet.desexed) cost.discountType = 'Desexed'
     if (pet.age > 10) cost.discountType = 'Senior'
 
-    if (cost.discountType !== '') cost.discount = (2 * cost.baseCost / 3)
+    // applying discounts if applicable
+    var discount = (cost.discountType !== '')
+    if (discount) cost.discount = (2 * cost.baseCost / 3)
 
+    // updating total cost
     cost.total = cost.baseCost - cost.discount
-
     return cost
   }
 
@@ -122,20 +125,21 @@ module.exports = function (state, emit) {
 
   // submit payment
   function submit () {
+    // start loading spinner
     emit('toggleLoading')
 
     api(function () {
       emit('toggleLoading')
-      
+
       var number = state.payment.card.number
       var ccv = state.payment.card.ccv
 
-      // simple validation
+      // if mock validation fails
       if ((number.length !== 16) || (ccv.length !== 3)) {
         // update error state
         emit('error', 'There has been a problem processing your payment.')
       } else {
-        // redirect user to payment success screen
+        // otherwise, redirect user to payment success screen
         emit('clearState')
         emit('pushState', '/payment/success')
       }
