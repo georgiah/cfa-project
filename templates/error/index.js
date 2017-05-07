@@ -11,7 +11,7 @@ module.exports = function (state, emit) {
       <div class="error">
         <div class="warning">
           <p>${warning}</p>
-          <button onclick=${close}>Close</button>
+          <button class="close" onclick=${close}>Close</button>
         </div>
       </div>
     `

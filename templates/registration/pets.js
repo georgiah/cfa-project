@@ -21,7 +21,10 @@ module.exports = function (state, emit) {
     return html`
       <section class="pets">
         <h1>Pet Registration</h1>
-        <h3>Tell us about your animal</h3>
+
+        <p>Providing details about your new pet, such as its microchip number, will assist us in finding it if it becomes lost. If your pet is desexed, your final registration fee will be discounted.</p>
+
+        <h2>Your pet's details</h2>
 
         <div class="form-container">
           <div class="form-field">
@@ -49,8 +52,8 @@ module.exports = function (state, emit) {
             <input type="text" id="desexed" value=${desexed} oninput=${update} />
           </div>
         </div>
-        <button type="submit" onclick=${submit}>
-          Submit
+        <button class="submit" onclick=${submit}>
+          Next
         </button>
       </section>
     `

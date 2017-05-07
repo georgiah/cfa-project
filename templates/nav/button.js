@@ -6,7 +6,7 @@ module.exports = function (label, link) {
   if (!link) link = '#'
 
   return html`
-    <div>
+    <div class="nav-button">
       <a href=${link}>
         ${label}
       </a>

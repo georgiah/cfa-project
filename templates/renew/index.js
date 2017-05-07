@@ -16,7 +16,10 @@ module.exports = function (state, emit) {
     return html`
       <section class="ownerKey">
         <h1>Registration Renewal</h1>
-        <h3>Tell us who you are</h3>
+
+        <p>To begin renewal, you must provide us with the "owner key" that was given to you when your pet was first registered. This information should be located in a recent e-mail we sent to you.</p>
+
+        <h2>Your details</h2>
 
         <div class="form-container">
           <div class="form-field">
@@ -24,8 +27,8 @@ module.exports = function (state, emit) {
             <input type="text" id="key" value=${key} oninput=${updateKey} />
           </div>
         </div>
-        <button type="submit" onclick=${submit}>
-          Submit
+        <button class="submit" onclick=${submit}>
+          Next
         </button>
         ${error(state, emit)}
       </section>
@@ -42,7 +45,7 @@ module.exports = function (state, emit) {
   // submit owner key
   function submit (e) {
     var key = state.owner.key
-    
+
     // validate owner key
     db.lookup(key, function (record) {
       if (record === null) {

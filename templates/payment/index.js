@@ -17,12 +17,9 @@ module.exports = function (state, emit) {
 
     return html`
       <section class="payment">
-        <h1>Pet Registration</h1>
-        <h3>Make your payment</h3>
+        <h1>Make a payment</h1>
+        <h2>Payment details</h2>
         <div class="form-container">
-          <h3>Payment breakdown</h3>
-          ${breakdown()}
-          ${totalCost()}
           <div class="form-field">
             Card Name
             <input type="text" id="name" value=${name} oninput=${update} />
@@ -40,8 +37,11 @@ module.exports = function (state, emit) {
             <input type="text" id="exp" value=${exp} oninput=${update} />
           </div>
         </div>
-        <button type="submit" onclick=${submit}>
-          Submit
+        <h2>Cost breakdown</h2>
+        ${breakdown()}
+        ${totalCost()}
+        <button class="submit" onclick=${submit}>
+          Pay & Submit
         </button>
         ${error(state, emit)}
       </section>
@@ -60,9 +60,9 @@ module.exports = function (state, emit) {
       var cost = petCost(pet)
 
       return html`
-        <div>
-          <p>${pet.type}: $${cost.baseCost}</p>
-          ${cost.discountType ? html`<p>${cost.discountType}: -$${cost.discount}</p>` : null}
+        <div class="breakdown">
+          <p>${pet.type} registration: $${cost.baseCost}</p>
+          ${cost.discountType ? html`<p>${cost.discountType} discount: -$${cost.discount}</p>` : null}
         </div>
       `
     })

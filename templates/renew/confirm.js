@@ -23,12 +23,10 @@ module.exports = function (state, emit) {
             ${state.pets.map(displayPet)}
           </table>
         </div>
-        <button onclick=${valid}>
-          Yes
-        </button>
-        <button onclick=${invalid}>
-          No
-        </button>
+        <div class="buttons">
+          <button class="yes" onclick=${valid}>Yes</button>
+          <button class="no" onclick=${invalid}>No</button>
+        </div>
       </section>
     `
   }
@@ -50,7 +48,7 @@ module.exports = function (state, emit) {
   // update error status, clear state, and redirect user to key page
   function invalid () {
     emit('clearState')
-    emit('error', 'Please enter your valid key or contact us')
+    emit('error', 'Please enter your correct owner key, or contact us.')
     emit('pushState', '/registration/renew')
   }
 }

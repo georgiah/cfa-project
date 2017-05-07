@@ -23,7 +23,10 @@ module.exports = function (state, emit) {
     return html`
       <section class="owner">
         <h1>Pet Registration</h1>
-        <h3>Tell us who you are</h3>
+
+        <p>In order to register your new pet, we need to obtain several details about yourself. This way, if your pet ever becomes lost, we know who they belong to so they can be returned safe and sound.</p>
+
+        <h2>Your details</h2>
 
         <div class="form-container">
           <div class="form-field">
@@ -59,8 +62,8 @@ module.exports = function (state, emit) {
             <input type="text" id="postcode" value=${postcode} oninput=${updateAddress} />
           </div>
         </div>
-        <button type="submit" onclick=${submit}>
-          Submit
+        <button class="submit" onclick=${submit}>
+          Next
         </button>
         ${error(state, emit)}
       </section>
@@ -90,7 +93,7 @@ module.exports = function (state, emit) {
     // street name validation
     if (streetName !== 'Abbotsford') {
       // update error state
-      emit('error', 'Address is invalid')
+      emit('error', 'Address is invalid.')
     } else {
       // redirect user to new pet registration
       emit('pushState', '/registration/new/pets')
